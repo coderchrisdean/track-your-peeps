@@ -1,0 +1,48 @@
+To Do List for Owen the Handyman on 01/25/2023:
+
+Task Priority:
+	--High Priority (H): Tasks that require immediate attention and should be done as soon as possible.
+	--Medium Priority (M): Tasks that are important but can wait a bit longer to be done.
+	--Low Priority (L): Tasks that are not urgent but still need to be done at some point.
+Kitchen:
+	--H Sink Clogged (May have something to do with bathroom)
+	--H Dishwasher Broken (Grinding Sound On Start)
+	--M Window Above Sink Is Broken
+	--L Gas Not working on Stove
+	--L Microwave Needs to be taken Out & Replaced with one on Counter
+	--L Washing Machine Sliding Door needs to be secured
+	-- *Sliding Door Knob needs to be replaced
+	-- *Washing Machine Door Needs to be Fixed
+	--L Refrigerator / Refrigerator
+	-- *Lights Going Out
+	-- *Check Icemaker
+
+Guest Bathroom:
+	--H Toilet Clogged and Backed Up
+	--M Handlebar on Sliding Door needs to be Fixed
+	--M Left Faucet Knob stuck and not twisting
+	--M Sliding Door Stuck
+
+Master Bedroom:
+	--H Ceiling Fan Remote Stopped working
+	--M Remote Needs to be Fixed/Replaced/Reprogrammed
+	--* How do I turn the fan on without a remote?
+	--L Closet Shelves Need to be Fixed
+
+Guest Bedroom:
+	--M Smoke Detector needs to be Fixed
+
+Hallway:
+	--M Smoke Detector needs to be fixed
+	--M Carbon Monoxide Detector needs to be fixed
+
+Master Bathroom:
+	--M The toilet needs to be Fixed (Note: Do not flush as neighbors are alleging a leak)
+	--L Handlebar on Sliding Shower Door needs Fixing
+	--L Check Faucet Handles
+	--L Shower switch (switching from bath to shower) is broken and does not work
+	* Ask about this since neighbor is claiming leaking.
+	--L Cannot be drained
+
+Outside Patio:
+	--M Steps falling apart need to be patched up.

@@ -1,17 +1,23 @@
-// Connect to SQL database
-const mysql = require('mysql');
-const dotenv = require('dotenv');
-dotenv.config();
+// configure dotenv
+require('dotenv').config();
+// const path = require('path');
+const mysql = require('mysql2');
+// create the connection to database
 
 
-// MySQL Connection (data stored in .env file)
-module.exports = mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    // Username
+const connection = mysql.createConnection({
+    host: 'localhost',
     user: process.env.DB_USER,
-    // Password
     password: process.env.DB_PASS,
-    // Database
-    database: process.env.DB_NAME
+    database: 'employee_db'
 });
+
+// if connection is successful, console log the message and run queries
+connection.connect((err) => {
+    if (err) throw err;
+    console.log(`Connected to server.`);    
+    // run queries
+    createDB();
+    startApplication();
+}
+);
