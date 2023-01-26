@@ -5,9 +5,12 @@ const mysql = require("mysql2");
 const cTable = require("console.table");
 
 // create the connection to database
+console.log(process.env.DB_USER)
+
+function connect() {
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+  user: 'root',
   password: process.env.DB_PASS,
   database: "employee_db",
   port: process.env.DB_PORT,
@@ -18,5 +21,6 @@ connection.query("SELECT * FROM employee", function (err, results) {
   if (err) throw err;
   console.table(results);
 });
+}
 
 module.exports = connection;

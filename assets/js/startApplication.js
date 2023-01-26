@@ -24,5 +24,4 @@ function startApplication() {
     });
 }
 
-module.exports = startApplication;
-
+module.exports = start;

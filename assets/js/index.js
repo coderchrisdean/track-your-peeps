@@ -30,7 +30,7 @@ dotenv.config();
 const figlet = require("figlet");
 
 // Variable Declarations
-const connection = require("./connect");
+const connect= require("./connect");
 const promptUser = require("./promptUser");
 const addEmployee = require("./addEmployee");
 const addRole = require("./addRole");
@@ -54,7 +54,7 @@ figlet.text("Track Your Peeps", {
     console.log(data)
     // wait 3 seconds before prompting the user
     setTimeout(function () {
-        connection();
+        connect();
     }, 3000);
 });
 
