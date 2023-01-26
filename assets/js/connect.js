@@ -11,7 +11,7 @@ function connect() {
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: 'root',
-  password: process.env.DB_PASS,
+  password: '#LoseWeight2023!',
   database: "employee_db",
   port: process.env.DB_PORT,
 });
@@ -19,8 +19,13 @@ const connection = mysql.createConnection({
 console.log(`Connected to the employee_db database.`);
 connection.query("SELECT * FROM employee", function (err, results) {
   if (err) throw err;
-  console.table(results);
+
+  // pause function for 1 second
+  // setTimeout(function () {
+  //   console.table(results);
+  // }, 1000);
+  
 });
 }
 
-module.exports = connection;
+module.exports = connect;

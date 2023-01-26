@@ -52,10 +52,14 @@ figlet.text("Track Your Peeps", {
         return;
     }
     console.log(data)
-    // wait 3 seconds before prompting the user
+    // wait 1 second before prompting the user
     setTimeout(function () {
         connect();
-    }, 3000);
+    }, 2000);
+    // wait 1 second before prompting the user
+    setTimeout(function () {
+        promptUser();
+    }, 1000);
 });
 
 
