@@ -11,7 +11,7 @@ function connect() {
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: 'root',
-  password: '#LoseWeight2023!',
+  password: process.env.DB_PASS,
   database: "employee_db",
   port: process.env.DB_PORT,
 });
