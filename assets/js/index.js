@@ -31,7 +31,6 @@ const figlet = require("figlet");
 
 // Variable Declarations
 const connection = require("./connect");
-const startApplication = require("./startApplication");
 const promptUser = require("./promptUser");
 const addEmployee = require("./addEmployee");
 const addRole = require("./addRole");
@@ -55,7 +54,7 @@ figlet.text("Track Your Peeps", {
     console.log(data)
     // wait 3 seconds before prompting the user
     setTimeout(function () {
-        promptUser();
+        connection();
     }, 3000);
 });
 
