@@ -1,3 +1,5 @@
+const inquirer = require("inquirer");
+
 // Prompt the user to select an action
 function promptUser() {
     inquirer.prompt({
@@ -44,3 +46,5 @@ function promptUser() {
         }
     });
 }
+
+module.exports = promptUser;

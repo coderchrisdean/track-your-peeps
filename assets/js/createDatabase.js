@@ -1,8 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-// create database function after connection is successful from connect.js and run schema.sql and seeds.sql
-module.exports = function createDB() {
+function createDatabase() {
     // read the schema.sql file
     let schema = fs.readFile(path.join(__dirname, '../db/schema.sql'), 'utf8', (err, data) => {
         if (err) throw err;
@@ -27,7 +26,7 @@ module.exports = function createDB() {
         });
     });
 }
-
+module.exports = createDatabase;
 
 
 

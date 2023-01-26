@@ -1,8 +1,7 @@
 // configure dotenv
 require('dotenv').config();
-// const path = require('path');
 const mysql = require('mysql2');
-// create the connection to database
+
 
 
 const connection = mysql.createConnection({
@@ -16,8 +15,8 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     console.log(`Connected to server.`);    
-    // run queries
-    createDB();
-    startApplication();
+
 }
 );
+
+module.exports = connection;

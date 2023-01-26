@@ -25,15 +25,11 @@
 
 
 // Package Imports
-const dotenv = require("dotenv")
-
-//
+const dotenv = require("dotenv");
 dotenv.config();
-const cTable = require("console.table");
 const figlet = require("figlet");
-const inquirer = require("inquirer");
 
-// File Imports
+// Variable Declarations
 const connection = require("./connect");
 const startApplication = require("./startApplication");
 const promptUser = require("./promptUser");
@@ -45,131 +41,37 @@ const viewRoles = require("./viewRoles");
 const viewDepartments = require("./viewDepartments");
 const updateEmployeeRole = require("./updateEmployeeRole");
 
-
-const path = require("path");
-
-
-// Start the application from the startApplication.js file
-startApplication();
-
-
-
-
-
-
-// Add Role
-function addRole() {
-
-    inquirer.prompt([
-        {
-            name: "title",
-            type: "input",
-            message: "What is the role title?"
-        },
-        {
-            name: "salary",
-            type: "input",
-            message: "What is the salary for this role?"
-        },
-        {
-            name: "department_id",
-            type: "input",
-            message: "What is the department ID for this role?"
-        }
-    ]).then(function(answer) {
-        connection.query("INSERT INTO role SET ?", {
-            title: answer.title,
-            salary: answer.salary,
-            department_id: answer.department_id
-        }, function(err) {
-            if (err) throw err;
-            console.log("Role added successfully!");
-            startApplication();
-        });
-    });
-}
-
-// add department
-function addDepartment() {
-
-    inquirer.prompt([
-        {
-            name: "name",
-            type: "input",
-            message: "What is the department name?"
-        }
-    ]).then(function(answer) {
-        connection.query("INSERT INTO department SET ?", {
-            name: answer.name
-        }, function(err) {
-            if (err) throw err;
-            console.log("Department added successfully!");
-            startApplication();
-        });
-    });
-}
-
-// view employees
-function viewEmployees() {
-    
-        connection.query("SELECT * FROM employee", function(err, res) {
-            if (err) throw err;
-            console.table(res);
-            startApplication();
-        });
+// Welcome to user to the application with figlet, connect to database, and then start prompts.
+figlet.text("Track Your Peeps", {
+    font: "Standard",
+    horizontalLayout: "default",
+    verticalLayout: "default",
+}, function (err, data) {
+    if (err) {
+        console.log("Something went wrong...");
+        console.dir(err);
+        return;
     }
+    console.log(data)
+    // wait 3 seconds before prompting the user
+    setTimeout(function () {
+        promptUser();
+    }, 3000);
+});
 
-// view roles
-function viewRoles() {
-        
-            connection.query("SELECT * FROM role", function(err, res) {
-                if (err) throw err;
-                console.table(res);
-                startApplication();
-            });
-        }
 
-// view departments
 
-function viewDepartments() {
 
-    connection.query("SELECT * FROM department", function(err, res) {
-        if (err) throw err;
-        console.table(res);
-        startApplication();
-    });
-}
 
-// update employee role
-function updateEmployeeRole() {
 
-    inquirer.prompt([
-        {
-            name: "id",
-            type: "input",
-            message: "What is the employee's ID?"
-        },
-        {
-            name: "role_id",
-            type: "input",
-            message: "What is the employee's new role ID?"
-        }
-    ]).then(function(answer) {
-        connection.query("UPDATE employee SET ? WHERE ?", [
-            {
-                role_id: answer.role_id
-            },
-            {
-                id: answer.id
-            }
-        ], function(err) {
-            if (err) throw err;
-            console.log("Employee role updated successfully!");
-            startApplication();
-        });
-    });
 
-}
+
+
+
+
+
+
+
 
 
 
