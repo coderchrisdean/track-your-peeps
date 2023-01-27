@@ -30,15 +30,11 @@ dotenv.config();
 const figlet = require("figlet");
 
 // Variable Declarations
-const connect= require("./connect");
+const connect =  require("./connect");
 const promptUser = require("./promptUser");
-const addEmployee = require("./addEmployee");
-const addRole = require("./addRole");
-const addDepartment = require("./addDepartment");
-const viewEmployees = require("./viewEmployees");
-const viewRoles = require("./viewRoles");
-const viewDepartments = require("./viewDepartments");
-const updateEmployeeRole = require("./updateEmployeeRole");
+
+
+
 
 // Welcome to user to the application with figlet, connect to database, and then start prompts.
 figlet.text("Track Your Peeps", {
@@ -49,18 +45,21 @@ figlet.text("Track Your Peeps", {
     if (err) {
         console.log("Something went wrong...");
         console.dir(err);
-        return;
     }
     console.log(data)
-    // wait 1 second before prompting the user
+    // wait 2 seconds before prompting the user
     setTimeout(function () {
         connect();
+        //wait 1 second before prompting the user
+        setTimeout(function () {
+            promptUser();
+        }, 1000);
     }, 2000);
-    // wait 1 second before prompting the user
-    setTimeout(function () {
-        promptUser();
-    }, 1000);
+   
+
 });
+
+
 
 
 
