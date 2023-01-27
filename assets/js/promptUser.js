@@ -1,12 +1,13 @@
 const inquirer = require("inquirer");
-const addEmployee = ("require ./addEmployee.js");
-const addRole = ("require./addRole.js");
-const addDepartment = ("require./addDepartment.js");
-const viewEmployees = ("require./viewEmployees.js");
-const viewRoles = ("require./viewRoles.js");
-const viewDepartments = ("require./viewDepartments.js");
-const updateEmployeeRole = ("require./updateEmployeeRole.js");
-const dropConnection = ("require./dropConnection.js");
+const addEmployee = require("./addEmployee.js");
+const addRole = require("./addRole.js");
+const addDepartment = require("./addDepartment.js");
+const viewEmployees = require("./viewEmployees.js");
+const viewRoles = require("./viewRoles.js");
+const viewDepartments = require("./viewDepartments.js");
+const updateEmployeeRole = require("./updateEmployeeRole.js");
+
+const dropConnection = require("./dropConnection.js");
 
 
 function promptUser() {
