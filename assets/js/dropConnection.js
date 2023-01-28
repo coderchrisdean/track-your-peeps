@@ -1,10 +1,11 @@
-// require('dotenv').config();
-const mysql = require("mysql");
-
 function dropConnection(connection) {
-  {
-    connection.end();
-    console.log("connection ended");
-  }
+  connection.end(function (err) {
+    if (err) {
+      console.log("Error ending connection: " + err.stack);
+      return;
+    }
+    console.log("Connection closed successfully.");
+  });
 }
+
 module.exports = dropConnection;

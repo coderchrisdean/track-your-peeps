@@ -2,7 +2,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const mysql = require("mysql2");
-const cTable = require("console.table");
 
 // create the connection to database
 
@@ -22,5 +21,7 @@ connection.query("SELECT * FROM employee", function (err, results) {
   
 });
 }
+
+
 
 module.exports = connect;
