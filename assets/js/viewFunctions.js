@@ -7,7 +7,6 @@ const inquirer = require('inquirer');
 
 // line break variables
 const lineBreak = "\n";
-const lineBreak2 = "\n\n";
 const lineBreakWithStars = "\n******************************\n";
 
 
@@ -23,12 +22,20 @@ const employees = new EmployeeData();
 // View All Employees Function using async/await
 const viewEmployees = async () => {
     try {
-        // get list of employees
-        const employees = await employees.viewDepartments();
+        // view all employees
+        const employees = await employees.viewEmployees();
         // display employees
         cTable(employees);
+        console.log(lineBreak);
+        console.log(lineBreakWithStars);
+        // return to main menu
+        promptUser();
     } catch (err) {
         console.log(err);
+        console.log(lineBreak);
+        console.log("An unknown error occurred, returning to main menu.");
+        // return to main menu
+        promptUser();
     }
 };
 
