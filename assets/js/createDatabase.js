@@ -28,9 +28,3 @@ function createDatabase() {
 }
 module.exports = createDatabase;
 
-
-
-
-
-// Path: track-your-peeps\assets\js\connect.js
-

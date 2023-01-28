@@ -2,8 +2,7 @@
 // index.js - Main JavaScript file for the application
 
 //Psuedo Code
-// GIVEN a command-line application that accepts user input
-// WHEN I start the application
+// WHEN I start the application --
 // THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 // WHEN I choose to view all departments
 // THEN I am presented with a formatted table showing department names and department ids
@@ -30,20 +29,6 @@ const figlet = require("figlet");
 // Variable Declarations
 const connect = require("./connect");
 const promptUser = require("./promptUser");
-const addEmployee = require("./addFunctions");
-const addRole = require("./addRole");
-const addDepartment = require("./addDepartment");
-const viewEmployees = require("./viewEmployees");
-const viewRoles = require("./viewRoles");
-const viewDepartments = require("./viewFunctions");
-const updateEmployeeRole = require("./updateEmployeeRole");
-const inquirer = require("inquirer");
-
-//use inquirer to get data from user
-
-const promptUser = () => {
-  return inquirer.prompt(questions);
-};
 
 // drop connection using async/await
 
@@ -56,24 +41,9 @@ const dropConnection = async () => {
 
 
 const userFunctions = {
-  promptUser,
-  dropConnection,
-  addEmployee,
-  addRole,
-  addDepartment,
-  viewEmployees,
-  viewRoles,
-  viewDepartments,
-  updateEmployeeRole,
+    promptUser,
+    dropConnection,
 };
-
-// // init promptUser function to complete inquirer prompt
-// const init = async () => {
-
-//     try {
-//     const 
-
-//     userFunctions.promptUser();
 
 
 // Welcome to user to the application with figlet, connect to database, and then start prompts.
@@ -92,8 +62,9 @@ figlet.text(
     console.log(data);
     // wait 1 second before starting prompts
     setTimeout(function () {
-        connect();
         promptUser();
         }, 1000);
   }
 );
+
+module.exports = userFunctions;
