@@ -1,0 +1,29 @@
+{
+  "name": "track-your-peeps",
+  "version": "1.0.0",
+  "description": "Employee Database Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "track-your-peeps"
+  },
+  "keywords": [
+    "track",
+    "your",
+    "peeps",
+    "data",
+    "management",
+    "system"
+  ],
+  "author": "Christopher Dean",
+  "license": "ISC",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "figlet": "^1.5.2",
+    "mysql2": "^3.0.1",
+    "util": "^0.12.5"
+  }
+}
