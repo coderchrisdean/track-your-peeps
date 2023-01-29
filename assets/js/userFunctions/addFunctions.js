@@ -1,7 +1,7 @@
 // linebreak for console
 const lineBreak1 = "----------------------------------";
 
-const EmployeeData = require("./EmployeeData");
+const EmployeeData = require("../EmployeeData");
 const cTable = require("console.table");
 const inquirer = require("./inquirer");
 

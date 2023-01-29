@@ -1,0 +1,2 @@
+-- DECLARE @sql department VARCHAR(30) DEFAULT 'IT';
+-- DECLARE @sql role VARCHAR(30) DEFAULT 'Developer';

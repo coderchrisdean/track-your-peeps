@@ -1,5 +1,5 @@
 // Track Your Peeps - Employee Database Management System
-// index.js - Main JavaScript file for the application
+// app.js - Main JavaScript file for the application
 
 //Psuedo Code
 // WHEN I start the application --
@@ -21,50 +21,93 @@
 //     // View the total utilized budget of a department -- ie the combined salaries of all employees in that department
 // 12. bonus points: delete departments, roles, and employees, view employees by manager, view employees by department, and delete departments, roles, and employees,
 
-// Package Imports
-const dotenv = require("dotenv");
-dotenv.config();
+const inquirer = require("inquirer");
 const figlet = require("figlet");
+const view = require("./userFunctions/viewFunctions");
+const add = require("./userFunctions/addFunctions");
+const update = require("./userFunctions/updateFunctions");
+const remove = require("./userFunctions/removeFunctions");
+const dropConnection = require("./userFunctions/dropConnection");
+const connection = require("./config/connection");
 
-// Variable Declarations
-const connect = require("./connect");
-const promptUser = require("./promptUser");
-
-// drop connection using async/await
-
-
-const dropConnection = async () => {
-  await connect();
+// use inquirer to prompt user for input
+const promptUser = (questions) => {
+  return inquirer.prompt(questions);
 };
 
-// create object to store functions
-
-
+// create object to hold the action functions to send from inquirer prompt
+// will move to separate file later
 const userFunctions = {
-    promptUser,
-    dropConnection,
+  "View All Employees": view.viewEmployees,
+  "View All Employees By Department": view.viewEmployeesByDepartment,
+  "View All Employees By Manager": view.viewEmployeesByManager,
+  "View All Roles": view.viewRoles,
+  "View All Departments": view.viewDepartments,
+  "Add Employee": add.addEmployee,
+  "Add Role": add.addRole,
+  "Add Department": add.addDepartment,
+  "Update Employee Role": update.updateEmployeeRole,
+  "Update Employee Manager": update.updateEmployeeManager,
+  "Remove Employee": remove.removeEmployee,
+  "Remove Role": remove.removeRole,
+  "Remove Department": remove.removeDepartment,
+  Exit: dropConnection,
 };
 
-
-// Welcome to user to the application with figlet, connect to database, and then start prompts.
-figlet.text(
-  "Track Your Peeps",
+// inquirer question - list of actions
+const action = [
   {
-    font: "Standard",
-    horizontalLayout: "default",
-    verticalLayout: "default",
+    type: "list",
+    name: "action",
+    message: "What would you like to do?",
+    choices: [
+      "View All Employees",
+      "View All Employees By Department",
+      "View All Employees By Manager",
+      "View All Roles",
+      "View All Departments",
+      "Add Employee",
+      "Add Role",
+      "Add Department",
+      "Update Employee Role",
+      "Update Employee Manager",
+      "Remove Employee",
+      "Remove Role",
+      "Remove Department",
+      "Exit",
+    ],
   },
-  function (err, data) {
+];
+
+// init prompt user for action
+const init = async () => {
+  try {
+    const actionResponse = await promptUser(action);
+    console.log("\n-----------------------------\n");
+    await userFunctions[actionResponse.action]();
+    console.log("\n-----------------------------\n");
+    init();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Display welcome message
+const start = async () =>
+  figlet("Track Your Peeps", (err, data) => {
     if (err) {
-      console.log("Something went wrong...");
-      console.dir(err);
+      console.log("Unexpected error: " + err);
     }
     console.log(data);
-    // wait 1 second before starting prompts
-    setTimeout(function () {
-        promptUser();
-        }, 1000);
-  }
-);
 
-module.exports = userFunctions;
+    // start the prompts after 1 second
+    setTimeout(init, 1000);
+  });
+
+start();
+
+// // connect to the database
+// connection.connect((err) => {
+//   if (err) throw err;
+//   console.log("connected as id " + connection.threadId + "
+//   ");

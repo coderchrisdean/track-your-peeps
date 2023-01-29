@@ -2,3 +2,4 @@ node_modules
 trackyourpeeps.txt
 *.env
 *.log
+*.txt

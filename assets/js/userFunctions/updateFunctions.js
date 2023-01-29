@@ -1,5 +1,6 @@
 // require EmployeeData.js
-const EmployeeData = require("./EmployeeData.js");
+const EmployeeData = require("../EmployeeData.js");
+const updateEmployeeRole = require("./updateFunctions.js");
 
 // Update Employee Role Function using async/await
 const updateEmployeeRole = async () => {
@@ -8,7 +9,7 @@ const updateEmployeeRole = async () => {
         const [employees, roles] = await Promise.all([employees.getEmployees(), employees.getRoles()]);
 
         // prompt for employee and role information
-        const updateEmployeeRole = await inquirer.promptUser([
+        const employee = await inquirer.promptUser([
         { type: "list",
         name: "employee",
         message: "Which employee's role do you want to update?",
