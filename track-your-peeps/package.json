@@ -24,6 +24,7 @@
     "console.table": "^0.10.0",
     "figlet": "^1.5.2",
     "mysql2": "^3.0.1",
+    "promise-mysql": "^5.2.0",
     "util": "^0.12.5"
   }
 }
