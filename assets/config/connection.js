@@ -6,11 +6,11 @@ const mysql = require("mysql2");
 // create the connection to database
 
 
-function connect() {
+
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
-  user: 'root',
-  password: 'simple',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: "employee_db",
   port: process.env.DB_PORT,
 });
@@ -20,8 +20,8 @@ connection.query("SELECT * FROM employee", function (err, results) {
   if (err) throw err;
   
 });
-}
 
 
 
-module.exports = connect;
+
+module.exports = connection;

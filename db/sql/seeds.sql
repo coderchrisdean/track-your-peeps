@@ -21,7 +21,7 @@ VALUES
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
     (800283001, "Christopher", "Dean", 1, 1),
-    (800283002, "John", "Smith", 2, 1),
+    (800283002, "Emma", "Smith", 2, 1),
     (800283003, "Jane", "Doe", 3, 1),
     (800283004, "Mary", "Jane", 4, 1),
     (800283005, "Sally", "May", 5, 1),
