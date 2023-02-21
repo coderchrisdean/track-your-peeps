@@ -3,3 +3,4 @@ trackyourpeeps.txt
 *.env
 *.log
 *.txt
+*.cnf

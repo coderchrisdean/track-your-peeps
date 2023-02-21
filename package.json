@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run source && npm run seed && node server.js",
-    "source": "mysql -u root -p${process.env.DB_PASS} ./db/schema.sql",
-    "seed": "mysql -u root -p${process.env.DB_PASS} ./db/seeds.sql"
+    "source": "mysql --defaults-extra-file=mysql.cnf < ./db/sql/schema.sql",
+    "seed": "mysql --defaults-extra-file=mysql.cnf < ./db/sql/seeds.sql",
+    "server": "node server.js"
   },
   "dependencies": {
     "console.table": "^0.10.0",
