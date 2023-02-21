@@ -28,7 +28,7 @@ const add = require("./userFunctions/addFunctions");
 const update = require("./userFunctions/updateFunctions");
 const remove = require("./userFunctions/removeFunctions");
 const dropConnection = require("./userFunctions/dropConnection");
-const connection = require("../config/connection");
+const connection = require("../../config/connection");
 
 // use inquirer to prompt user for input
 const promptUser = (questions) => {
