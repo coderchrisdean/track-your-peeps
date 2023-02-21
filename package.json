@@ -1,4 +1,13 @@
 {
+  "name": "track-your-peeps",
+  "version": "1.0.0",
+  "description": "Employee database management system.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run source && npm run seed && node server.js",
+    "source": "mysql -u root -p${process.env.DB_PASS} ./db/schema.sql",
+    "seed": "mysql -u root -p${process.env.DB_PASS} ./db/seeds.sql"
+  },
   "dependencies": {
     "console.table": "^0.10.0",
     "dotenv": "^16.0.3",
