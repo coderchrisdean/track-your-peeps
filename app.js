@@ -21,10 +21,14 @@
 //     // View the total utilized budget of a department -- ie the combined salaries of all employees in that department
 // 12. bonus points: delete departments, roles, and employees, view employees by manager, view employees by department, and delete departments, roles, and employees,
 
-const inquirer = require("inquirer");
+const inquirer = require('inquirer');
 const figlet = require("figlet");
-const { view, add, update, remove, dropConnection } = require("./assets/js/userFunctions");
-const connection = require("../config/connection");
+// import all functions to be used in app.js
+const view = require("./views/assets/js/userFunctions/viewFunctions");
+const add = require("./views/assets/js/userFunctions/addFunctions");
+const update = require("./views/assets/js/userFunctions/updateFunctions");
+const remove = require("./views/assets/js/userFunctions/removeFunctions");
+const dropConnection = require("./views/assets/js/userFunctions/dropConnection");
 
 // use inquirer to prompt user for input
 const promptUser = (questions) => {
@@ -34,43 +38,43 @@ const promptUser = (questions) => {
 // create object to hold the action functions to send from inquirer prompt
 // will move to separate file later
 const userFunctions = {
-  "View All Employees": view.viewEmployees,
-  "View All Employees By Department": view.viewEmployeesByDepartment,
-  "View All Employees By Manager": view.viewEmployeesByManager,
-  "View All Roles": view.viewRoles,
-  "View All Departments": view.viewDepartments,
-  "Add Employee": add.addEmployee,
-  "Add Role": add.addRole,
-  "Add Department": add.addDepartment,
-  "Update Employee Role": update.updateEmployeeRole,
-  "Update Employee Manager": update.updateEmployeeManager,
-  "Remove Employee": remove.removeEmployee,
-  "Remove Role": remove.removeRole,
-  "Remove Department": remove.removeDepartment,
+  'View All Employees': view.viewEmployees,
+  'View All Employees By Department': view.viewDepartments,
+  'View All Employees By Manager': view.viewAllEmployeesByManager,
+  'View All Roles': view.viewRoles,
+  'View All Departments': view.viewDepartments,
+  'Add Employee': add.addEmployee,
+  'Add Role': add.addRole,
+  'Add Department': add.addDepartment,
+  'Update Employee Role': update.updateEmployeeRole,
+  'Update Employee Manager': update.updateEmployeeManager,
+  'Remove Employee': remove.removeEmployee,
+  'Remove Role': remove.removeRole,
+  'Remove Department': remove.removeDepartment,
   Exit: dropConnection,
 };
 
 // inquirer question - list of actions
 const action = [
   {
-    type: "list",
-    name: "action",
-    message: "What would you like to do?",
+    type: 'list',
+    name: 'action',
+    message: 'What would you like to do?',
     choices: [
-      "View All Employees",
-      "View All Employees By Department",
-      "View All Employees By Manager",
-      "View All Roles",
-      "View All Departments",
-      "Add Employee",
-      "Add Role",
-      "Add Department",
-      "Update Employee Role",
-      "Update Employee Manager",
-      "Remove Employee",
-      "Remove Role",
-      "Remove Department",
-      "Exit",
+      'View All Employees',
+      'View All Employees By Department',
+      'View All Employees By Manager',
+      'View All Roles',
+      'View All Departments',
+      'Add Employee',
+      'Add Role',
+      'Add Department',
+      'Update Employee Role',
+      'Update Employee Manager',
+      'Remove Employee',
+      'Remove Role',
+      'Remove Department',
+      'Exit',
     ],
   },
 ];
@@ -78,15 +82,24 @@ const action = [
 // init prompt user for action
 const init = async () => {
   try {
+    console.log('\n-----------------------------\n');
+    // call viewAllEmployees function on initialization
+    await view.viewAllEmployees();
+    console.log('\n-----------------------------\n');
+
+    // prompt user for the action
     const actionResponse = await promptUser(action);
-    console.log("\n-----------------------------\n");
+    console.log('\n-----------------------------\n');
     await userFunctions[actionResponse.action]();
-    console.log("\n-----------------------------\n");
+    console.log('\n-----------------------------\n');
+
+    // call init function recursively
     init();
   } catch (err) {
     console.log(err);
   }
 };
+
 
 
 // Display welcome message

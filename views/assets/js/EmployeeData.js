@@ -1,9 +1,9 @@
-const connect = require("./connect");
+const connection = require("../../../config/connection");
 const cTable = require("console.table");
 const util = require("util");
 
 // use promises to perform SQL queries
-const query = util.promisify(connect.query).bind(connect);
+const query = util.promisify(connection.query).bind(connection);
 
 
 // data constructor

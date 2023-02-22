@@ -3,7 +3,6 @@ const lineBreak1 = "----------------------------------";
 
 const EmployeeData = require("../EmployeeData");
 const cTable = require("console.table");
-const inquirer = require("./inquirer");
 
 // inquirer to prompt user for information
 const promptUser = async (questions) => {

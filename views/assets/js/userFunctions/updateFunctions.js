@@ -1,6 +1,5 @@
 // require EmployeeData.js
 const EmployeeData = require("../EmployeeData.js");
-const inquirer = require("./inquirer");
 
 // Update Employee Role Function using async/await
 const updateEmployeeRole = async () => {
