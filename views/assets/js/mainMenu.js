@@ -2,12 +2,12 @@
 // require EmployeeData.js
 const EmployeeData = require("./EmployeeData.js");
 // require connect.js
-const connect = require("./connect.js");
+const connect = require("./connect.js.js");
 //require cTable.js
 const cTable = require("console.table");
 // require inquirer.js
 const inquirer = require("inquirer");
-const { dropConnection } = require("./index.js");
+const { dropConnection } = require("./index.js.js");
 
 // other files/commands
 const { view } = require("./userFunctions/viewFunctions.js");

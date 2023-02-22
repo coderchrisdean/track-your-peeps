@@ -49,17 +49,17 @@ const addEmployee = async () => {
         message: "Choose the employee's role?",
       },
 
-      // { type: "list",
-      // name: "manager",
-      // message: "Who is the employee's manager?",
-      // choices: function() {
-      //     // create array of manager names
-      //     const managerArray = [];
-      //     employees.forEach(({ first_name, last_name }) => {
-      //     managerArray.push(`${first_name} ${last_name}`);
-      //     });
-      //     return managerArray;
-      // } },
+      { type: "list",
+      name: "manager",
+      message: "Who is the employee's manager?",
+      choices: function() {
+          // create array of manager names
+          const managerArray = [];
+          employees.forEach(({ first_name, last_name }) => {
+          managerArray.push(`${first_name} ${last_name}`);
+          });
+          return managerArray;
+      } },
     ]);
 
     // write employee information to database
@@ -118,4 +118,8 @@ const addDepartment = async () => {
 };
 
 // Export functions
-module.exports = { addEmployee, addRole, addDepartment };
+module.exports = {
+  addEmployee,
+  addRole,
+  addDepartment,
+}

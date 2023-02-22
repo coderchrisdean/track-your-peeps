@@ -4,10 +4,10 @@
   "description": "Employee database management system.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run source && npm run seed && node server.js",
-    "source": "mysql --defaults-extra-file=mysql.cnf < ./db/sql/schema.sql",
-    "seed": "mysql --defaults-extra-file=mysql.cnf < ./db/sql/seeds.sql",
-    "server": "node server.js"
+    "start": "npm run source && npm run seed && node ./views/app.js",
+    "source": "mysql --defaults-extra-file=mysql.cnf < ./models/db/sql/schema.sql",
+    "seed": "mysql --defaults-extra-file=mysql.cnf < ./models/db/sql/seeds.sql"
+
   },
   "dependencies": {
     "console.table": "^0.10.0",

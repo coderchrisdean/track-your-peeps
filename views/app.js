@@ -23,12 +23,8 @@
 
 const inquirer = require("inquirer");
 const figlet = require("figlet");
-const view = require("./userFunctions/viewFunctions");
-const add = require("./userFunctions/addFunctions");
-const update = require("./userFunctions/updateFunctions");
-const remove = require("./userFunctions/removeFunctions");
-const dropConnection = require("./userFunctions/dropConnection");
-const connection = require("../../config/connection");
+const { view, add, update, remove, dropConnection } = require("./assets/js/userFunctions");
+const connection = require("../config/connection");
 
 // use inquirer to prompt user for input
 const promptUser = (questions) => {
@@ -92,6 +88,7 @@ const init = async () => {
   }
 };
 
+
 // Display welcome message
 const start = async () =>
   figlet("Track Your Peeps", (err, data) => {
@@ -106,8 +103,3 @@ const start = async () =>
 
 start();
 
-// // connect to the database
-// connection.connect((err) => {
-//   if (err) throw err;
-//   console.log("connected as id " + connection.threadId + "
-//   ");
