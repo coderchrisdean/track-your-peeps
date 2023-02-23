@@ -22,7 +22,7 @@ const addEmployee = async () => {
     ]);
 
     // prompt for employee information
-    const addEmployee = await promptUser([
+    let addEmployee = await promptUser([
       {
         type: "input",
         name: "first_name",
@@ -53,7 +53,7 @@ const addEmployee = async () => {
       message: "Who is the employee's manager?",
       choices: function() {
           // create array of manager names
-          const managerArray = [];
+          let managerArray = [];
           employees.forEach(({ first_name, last_name }) => {
           managerArray.push(`${first_name} ${last_name}`);
           });
@@ -77,10 +77,10 @@ const addEmployee = async () => {
 const addRole = async () => {
   try {
     // get list of departments to populate inquirer prompt
-    const departments = await EmployeeData.viewDepartments();
+    const departments = await EmployeeData.viewAllDepartments();
 
     // prompt for role information
-    const addRole = await promptUser([
+    let addARole = await promptUser([
       { type: "input", name: "title", message: "What is the role's title?" },
       { type: "input", name: "salary", message: "What is the role's salary?" },
       {
@@ -121,4 +121,5 @@ module.exports = {
   addEmployee,
   addRole,
   addDepartment,
+
 }

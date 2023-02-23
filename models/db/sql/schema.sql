@@ -24,3 +24,11 @@ CREATE TABLE employee (
     role_id INT,
     manager_id INT
 );
+
+DROP TABLE IF EXISTS manager;
+CREATE TABLE manager (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    manager_id INT
+);

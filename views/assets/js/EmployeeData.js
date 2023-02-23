@@ -33,7 +33,7 @@ class EmployeeData {
     // get all employees by department
     async viewEmployeesByDepartment(department_id) {
         const employees = await query(
-            "SELECT * FROM employee WHERE department_id = ?",
+            "SELECT * FROM employee WHERE id = ?",
             department_id
         );
         return employees;
@@ -41,7 +41,7 @@ class EmployeeData {
     // get all employees by manager
     async viewEmployeesByManager(manager_id) {
         const employees = await query(
-            "SELECT * FROM employee WHERE manager_id = ?",
+            "SELECT * FROM employee WHERE id = ?",
             manager_id
         );
         return employees;

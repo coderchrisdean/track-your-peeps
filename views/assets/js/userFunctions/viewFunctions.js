@@ -13,7 +13,7 @@ const promptUser = (questions) => {
 // View all employees
 const viewAllEmployees = async () => {
   try {
-    const employees = await employeeData.viewEmployees();
+    const employees = await employeeData.viewAllEmployees();
     cTable.getTable(employees);
     console.table(employees);
   } catch (err) {
@@ -69,6 +69,9 @@ const viewEmployeesByDepartment = async () => {
       },
     ]);
 
+    // get list of managers to populate inquirer prompt
+    const managers = await employeeData.viewManagers();
+
     // prompt for manager information
     const managerResponse = await promptUser([
       {
@@ -89,23 +92,23 @@ const viewEmployeesByDepartment = async () => {
       },
     ]);
 
-    // view all employees by manager
-    const viewAllEmployeesByManager = async () => {
-      try {
-        // get list of managers to populate inquirer prompt
-        const managers = await employeeData.viewManagers();
+    // get employees from database
+    const employees = await employeeData.viewEmployeesByDepartment(
+      departmentResponse.department_id,
+      managerResponse.manager_id
+    );
+    console.table(employees);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-        // get employees from database
-        const employees = await employeeData.viewEmployeesByManager(
-          managerResponse.manager_id
-        );
-        cTable.getTable(employees);
-        console.table(employees);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    viewAllEmployeesByManager();
+// view all employees by manager
+const viewAllEmployeesByManager = async (manager_id) => {
+  try {
+    // get employees from database
+    const employees = await employeeData.viewEmployeesByManager(manager_id);
+    console.table(employees);
   } catch (err) {
     console.log(err);
   }
@@ -116,4 +119,5 @@ module.exports = {
   viewRoles,
   viewDepartments,
   viewEmployeesByDepartment,
+  viewAllEmployeesByManager,
 };

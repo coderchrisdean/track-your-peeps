@@ -38,7 +38,7 @@ const promptUser = (questions) => {
 // create object to hold the action functions to send from inquirer prompt
 // will move to separate file later
 const userFunctions = {
-  'View All Employees': view.viewEmployees,
+  'View All Employees': view.viewAllEmployees,
   'View All Employees By Department': view.viewDepartments,
   'View All Employees By Manager': view.viewAllEmployeesByManager,
   'View All Roles': view.viewRoles,
@@ -76,22 +76,27 @@ const action = [
       'Remove Department',
       'Exit',
     ],
+    default: 'View All Employees' // Set a default value
   },
 ];
 
-// init prompt user for action
 const init = async () => {
   try {
     console.log('\n-----------------------------\n');
-    // call viewAllEmployees function on initialization
+    // call viewAllEmployees function on initialization and wait for it to complete
     await view.viewAllEmployees();
     console.log('\n-----------------------------\n');
 
     // prompt user for the action
     const actionResponse = await promptUser(action);
     console.log('\n-----------------------------\n');
+    console.log("Selected action:", actionResponse.action);
+    console.log("Available actions:", Object.keys(userFunctions));
+    
     await userFunctions[actionResponse.action]();
     console.log('\n-----------------------------\n');
+ 
+    
 
     // call init function recursively
     init();
@@ -99,6 +104,7 @@ const init = async () => {
     console.log(err);
   }
 };
+
 
 
 
