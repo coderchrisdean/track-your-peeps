@@ -33,7 +33,7 @@ class EmployeeData {
   // view all employees by manager
   async viewAllEmployeesByManager(manager_id) {
     const employees = await query(
-      "SELECT * FROM employee WHERE id = ?",
+      "SELECT * FROM employee WHERE manager_id = ?",
       [manager_id]
     );
     return employees;
@@ -49,6 +49,13 @@ class EmployeeData {
     return departments;
   }
   // get all managers
+async viewAllManagers() {
+    const managers = await query(
+      "SELECT * FROM employee WHERE id IN (SELECT DISTINCT manager_id FROM employee)"
+    );
+    return managers;
+  }
+
   async viewManagers() {
     const managers = await query(
       "SELECT * FROM employee WHERE manager_id IS NULL"
@@ -108,13 +115,13 @@ class EmployeeData {
     return removedDepartment;
   }
 
-  // get the total utilized budget of a department -- ie the combined salaries of all employees in that department
-  async viewDepartmentBudget(department_id) {
+// get the total utilized budget of a department -- ie the combined salaries of all employees in that department
+async viewDepartmentBudget(department_id) {
     const budget = await query(
       "SELECT SUM(salary) AS budget FROM employee LEFT JOIN role ON employee.role_id = role.id WHERE department_id = ?",
-      department_id
+      [department_id]
     );
-    return budget;
+    return budget[0].budget;
   }
 }
 

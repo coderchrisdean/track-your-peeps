@@ -115,6 +115,15 @@ const viewAllEmployeesByManager = async () => {
     console.log(err);
   }
 }
+const viewDepartmentBudget = async (department_id) => {
+  const budget = await query(
+    "SELECT SUM(salary) AS budget FROM employee LEFT JOIN role ON employee.role_id = role.id WHERE department_id = ?",
+    [department_id]
+  );
+  return budget[0].budget;
+};
+
+
 
 module.exports = {
   viewAllEmployees,
@@ -122,4 +131,5 @@ module.exports = {
   viewDepartments,
   viewEmployeesByDepartment,
   viewAllEmployeesByManager,
+  viewDepartmentBudget,
 };
