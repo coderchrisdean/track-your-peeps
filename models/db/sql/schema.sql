@@ -27,8 +27,10 @@ CREATE TABLE employee (
 
 DROP TABLE IF EXISTS manager;
 CREATE TABLE manager (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    manager_id INT
+    manager_title VARCHAR(30),
+    position_id INT,
+    PRIMARY KEY (id, position_id)
 );

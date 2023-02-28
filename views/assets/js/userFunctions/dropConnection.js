@@ -1,7 +1,7 @@
 
 
 // drop connection to database
-const dropConnection = () => {
+const dropConnection = (connection) => {
     console.log("Thank you for using Track Your Peeps!");
     connection.end();
     process.exit();

@@ -89,7 +89,7 @@ const viewEmployeesByDepartment = async () => {
           return choiceArray;
         },
         message: "Which manager's employees do you want to view?",
-      },
+      }
     ]);
 
     // get employees from database
@@ -104,15 +104,38 @@ const viewEmployeesByDepartment = async () => {
 };
 
 // view all employees by manager
-const viewAllEmployeesByManager = async (manager_id) => {
+const viewAllEmployeesByManager = async () => {
   try {
+    // get list of managers to populate inquirer prompt
+    const managers = await employeeData.viewManagers();
+
+    // prompt for manager information
+    const managerResponse = await promptUser([
+      {
+        type: "list",
+        name: "manager_id",
+        choices: function () {
+          const choiceArray = [];
+          managers.forEach((manager) => {
+            const managerObject = {
+              name: `${manager.first_name} ${manager.last_name}`,
+              value: manager.id,
+            };
+            choiceArray.push(managerObject);
+          });
+          return choiceArray;
+        },
+        message: "Which manager's employees do you want to view?",
+      },
+    ]);
+
     // get employees from database
-    const employees = await employeeData.viewEmployeesByManager(manager_id);
+    const employees = await employeeData.viewAllEmployeesByManager(managerResponse.manager_id);
     console.table(employees);
   } catch (err) {
     console.log(err);
   }
-};
+}
 
 module.exports = {
   viewAllEmployees,

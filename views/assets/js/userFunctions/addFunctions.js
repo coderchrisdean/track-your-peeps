@@ -1,28 +1,19 @@
-// linebreak for console
-const lineBreak1 = "----------------------------------";
-
 const EmployeeData = require("../EmployeeData");
-const cTable = require("console.table");
-
-// inquirer to prompt user for information
-const promptUser = async (questions) => {
-  return await inquirer.prompt(questions);
-};
-
-// Create new EmployeeData object
-const employees = new EmployeeData();
+const employeesData = new EmployeeData();
+const inquirer = require("inquirer");
+const lineBreak1 = "----------------------------------";
 
 // Add Employee Function using async/await
 const addEmployee = async () => {
   try {
     // get list of roles and employees to populate inquirer prompt
-    const [roles, employees] = await Promise.all([
-      employees.getRoles(),
-      employees.getEmployees(),
+    const [roles, emps] = await Promise.all([
+      employeesData.viewRoles(),
+      employeesData.viewAllEmployees(),
     ]);
 
     // prompt for employee information
-    let addEmployee = await promptUser([
+    const addEmployee = await inquirer.prompt([
       {
         type: "input",
         name: "first_name",
@@ -35,91 +26,95 @@ const addEmployee = async () => {
       },
       {
         type: "list",
-        name: "role",
+        name: "role_id",
         message: "What is the employee's role?",
-        choices: function () {
-          // create array of role titles
-          const roleArray = [];
-          roles.forEach(({ title }) => {
-            roleArray.push(title);
-          });
-          return roleArray;
-        },
-        message: "Choose the employee's role?",
+        choices: roles.map((role) => ({
+          name: role.title,
+          value: role.id,
+        })),
       },
-
-      { type: "list",
-      name: "manager",
-      message: "Who is the employee's manager?",
-      choices: function() {
-          // create array of manager names
-          let managerArray = [];
-          employees.forEach(({ first_name, last_name }) => {
-          managerArray.push(`${first_name} ${last_name}`);
-          });
-          return managerArray;
-      } },
+      {
+        type: "list",
+        name: "manager_id",
+        message: "Who is the employee's manager?",
+        choices: emps.map((employee) => ({
+          name: `${employee.first_name} ${employee.last_name}`,
+          value: employee.id,
+        })),
+      },
     ]);
 
     // write employee information to database
-    await employees.addEmployee(addEmployee);
+    await employeesData.addEmployee(addEmployee);
     console.log(lineBreak1);
     console.log("Employee added");
-    cTable(employees);
+    console.table(await employeesData.getEmployees());
   } catch (err) {
     console.log(err);
   }
 };
-
-// Update Employee Function using async/await
 
 // Add Role Function using async/await
 const addRole = async () => {
   try {
     // get list of departments to populate inquirer prompt
-    const departments = await EmployeeData.viewAllDepartments();
+    const departments = await employeesData.viewAllDepartments();
 
     // prompt for role information
-    let addARole = await promptUser([
+    const addARole = await inquirer.prompt([
       { type: "input", name: "title", message: "What is the role's title?" },
-      { type: "input", name: "salary", message: "What is the role's salary?" },
+      {
+        type: "number",
+        name: "salary",
+        message: "What is the role's salary? (do not enter any special characters)",
+        validate: (input) => {
+          if (isNaN(input) || input < 0) {
+            return "Please enter a valid positive number";
+          }
+          return true;
+        },
+      },
       {
         type: "list",
         name: "department_id",
         message: "What is the role's department?",
-        choices: departments,
+        choices: departments.map((department) => ({
+          name: department.name,
+          value: department.id,
+        })),
       },
     ]);
+
+    // create new role
+    await employeesData.addRole(addARole);
+    console.log(lineBreak1);
+    console.log("Role added");
+    console.table(await employeesData.viewRoles());
   } catch (err) {
     console.log(err);
   }
 };
 
-// Add Department Function using async/await
 const addDepartment = async () => {
   try {
     // prompt for department information
-    const newDepartment = await promptUser([
+    const newDepartment = await inquirer.prompt([
       {
         type: "input",
-        name: "department",
+        name: "name",
         message: "What is the department's name?",
       },
     ]);
-    //create new department
-    await employees.addDepartment(newDepartment);
+
+    // create new department
+    await employeesData.addDepartment(newDepartment);
     console.log(lineBreak1);
     console.log("Department added");
-    cTable(employees);
+    console.table(await employeesData.viewDepartments());
   } catch (err) {
     console.log(err);
   }
 };
 
 // Export functions
-module.exports = {
-  addEmployee,
-  addRole,
-  addDepartment,
-
-}
+module.exports = { addEmployee, addRole, addDepartment };

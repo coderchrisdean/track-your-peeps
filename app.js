@@ -19,16 +19,18 @@
 // WHEN I choose to update an employee role
 // THEN I am prompted to select an employee to update and their new role and this information
 //     // View the total utilized budget of a department -- ie the combined salaries of all employees in that department
-// 12. bonus points: delete departments, roles, and employees, view employees by manager, view employees by department, and delete departments, roles, and employees,
-
+// 12. bonus points: delete departments, roles, and employees, view employees by manager, view employees by department
+const EmployeeData = require('./views/assets/js/EmployeeData');
+const employeesData = new EmployeeData();
 const inquirer = require('inquirer');
 const figlet = require("figlet");
 // import all functions to be used in app.js
-const view = require("./views/assets/js/userFunctions/viewFunctions");
-const add = require("./views/assets/js/userFunctions/addFunctions");
-const update = require("./views/assets/js/userFunctions/updateFunctions");
-const remove = require("./views/assets/js/userFunctions/removeFunctions");
-const dropConnection = require("./views/assets/js/userFunctions/dropConnection");
+const view = require('./views/assets/js/userFunctions/viewFunctions');
+const add = require('./views/assets/js/userFunctions/addFunctions');
+const update = require('./views/assets/js/userFunctions/updateFunctions');
+const remove = require('./views/assets/js/userFunctions/removeFunctions');
+const dropConnection = require('./views/assets/js/userFunctions/dropConnection');
+
 
 // use inquirer to prompt user for input
 const promptUser = (questions) => {
@@ -36,10 +38,9 @@ const promptUser = (questions) => {
 };
 
 // create object to hold the action functions to send from inquirer prompt
-// will move to separate file later
 const userFunctions = {
   'View All Employees': view.viewAllEmployees,
-  'View All Employees By Department': view.viewDepartments,
+  'View All Employees By Department': view.viewAllDepartments,
   'View All Employees By Manager': view.viewAllEmployeesByManager,
   'View All Roles': view.viewRoles,
   'View All Departments': view.viewDepartments,
@@ -48,10 +49,38 @@ const userFunctions = {
   'Add Department': add.addDepartment,
   'Update Employee Role': update.updateEmployeeRole,
   'Update Employee Manager': update.updateEmployeeManager,
-  'Remove Employee': remove.removeEmployee,
+  'Remove Employee': async () => {
+    try {
+      // get list of employees to populate inquirer prompt
+      const employees = await employeesData.viewAllEmployees();
+  
+      // prompt user to select employee to remove
+      const removeEmployee = await inquirer.prompt([
+        {
+          type: "list",
+          name: "id",
+          message: "Which employee would you like to remove?",
+          choices: employees.map((employee) => ({
+            name: `${employee.first_name} ${employee.last_name}`,
+            value: employee.id,
+          })),
+        },
+      ]);
+  
+      // delete employee from database
+      await employeesData.deleteEmployee(removeEmployee.id);
+  
+      console.log(lineBreak1);
+      console.log("Employee removed");
+  
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  
   'Remove Role': remove.removeRole,
   'Remove Department': remove.removeDepartment,
-  Exit: dropConnection,
+  'Exit':() => dropConnection(connection),
 };
 
 // inquirer question - list of actions
