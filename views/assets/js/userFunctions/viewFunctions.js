@@ -69,39 +69,18 @@ const viewEmployeesByDepartment = async () => {
       },
     ]);
 
-    // get list of managers to populate inquirer prompt
-    const managers = await employeeData.viewManagers();
-
-    // prompt for manager information
-    const managerResponse = await promptUser([
-      {
-        type: "list",
-        name: "manager_id",
-        choices: function () {
-          const choiceArray = [];
-          managers.forEach((manager) => {
-            const managerObject = {
-              name: `${manager.first_name} ${manager.last_name}`,
-              value: manager.id,
-            };
-            choiceArray.push(managerObject);
-          });
-          return choiceArray;
-        },
-        message: "Which manager's employees do you want to view?",
-      }
-    ]);
-
     // get employees from database
     const employees = await employeeData.viewEmployeesByDepartment(
-      departmentResponse.department_id,
-      managerResponse.manager_id
+      departmentResponse.department_id
     );
     console.table(employees);
   } catch (err) {
     console.log(err);
   }
 };
+
+
+
 
 // view all employees by manager
 const viewAllEmployeesByManager = async () => {

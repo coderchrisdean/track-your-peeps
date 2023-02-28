@@ -40,7 +40,7 @@ const promptUser = (questions) => {
 // create object to hold the action functions to send from inquirer prompt
 const userFunctions = {
   'View All Employees': view.viewAllEmployees,
-  'View All Employees By Department': view.viewAllDepartments,
+  'View All Employees By Department': view.viewEmployeesByDepartment,
   'View All Employees By Manager': view.viewAllEmployeesByManager,
   'View All Roles': view.viewRoles,
   'View All Departments': view.viewDepartments,

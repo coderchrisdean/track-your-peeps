@@ -27,17 +27,14 @@ class EmployeeData {
   }
   // view all employees by department
   async viewEmployeesByDepartment(department_id) {
-    const employees = await query(
-      "SELECT * FROM employee WHERE id = ?",
-      department_id
-    );
+    const employees = await query("SELECT * FROM employee WHERE department_id = ?",[department_id]);
     return employees;
   }
   // view all employees by manager
   async viewAllEmployeesByManager(manager_id) {
     const employees = await query(
       "SELECT * FROM employee WHERE id = ?",
-      manager_id
+      [manager_id]
     );
     return employees;
   }
@@ -96,7 +93,7 @@ class EmployeeData {
   async removeEmployee(employee_id) {
     const removedEmployee = await query(
       "DELETE FROM employee WHERE id = ?",
-      employee_id
+      [employee_id]
     );
     return removedEmployee;
   }
