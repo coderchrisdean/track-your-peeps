@@ -34,32 +34,35 @@ const removeEmployee = async () => {
         console.log(err);
     }
     };
-// remove Department Function using async/await
+// Remove Department Function using async/await
 const removeDepartment = async () => {
-
+    const employeeData = new EmployeeData();
+    const departments = await employeeData.viewDepartments();
     try {
-        // get list of departments to populate inquirer prompt
-        const departments = await employeesData.viewDepartments();
-    
-        // prompt for department information
-        const removeDepartment = await promptUser([
+      // prompt user for department to remove
+      const { department } = await inquirer.prompt([
         {
-            type: "list",
-            name: "department",
-            message: "Which department do you want to remove?",
-            choices: departments,
+          type: "list",
+          name: "department",
+          message: "Which department do you want to remove?",
+          choices: departments.map((department) => department.name),
         },
-        ]);
-    
-        // remove department from database
-        await employeesData.removeDepartment(removeDepartment.department_id);
-        console.log(lineBreak1);
-        console.log("Department removed");
-        console.table(employees);
+      ]);
+      const selectedDepartment = departments.find(
+        (dep) => dep.name === department
+      );
+      const { affectedRows } = await employeeData.removeDepartment(
+        selectedDepartment.id
+      );
+      if (affectedRows) {
+        console.log(`\n${department} department removed successfully!\n`);
+      } else {
+        console.log(`\nFailed to remove ${department} department.\n`);
+      }
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
-    }
+  };
 // remove Role Function using async/await
 const removeRole = async () => {
     try {

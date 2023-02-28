@@ -107,7 +107,7 @@ class EmployeeData {
   }
   //remove department
   async removeDepartment(department_id) {
-    const removedDepartment = await query("DELETE FROM department WHERE id = ?",department_id);
+    const removedDepartment = await query("DELETE FROM department WHERE id = ?",[department_id]);
     return removedDepartment;
   }
 
